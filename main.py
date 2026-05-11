@@ -1,5 +1,6 @@
 from fastapi import FastAPI, UploadFile, File, HTTPException
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, FileResponse
+from fastapi.staticfiles import StaticFiles
 import uvicorn
 import io
 from ela import perform_ela
@@ -14,9 +15,13 @@ app = FastAPI(
     version="1.0.0"
 )
 
+# Mount the static directory to serve frontend assets (CSS, JS, images)
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
 @app.get("/")
 def read_root():
-    return {"message": "Welcome to TrustNet API. Use /analyze to submit documents for fraud detection."}
+    # Serve the frontend UI
+    return FileResponse("static/index.html")
 
 @app.post("/analyze")
 async def analyze_document(file: UploadFile = File(...)):

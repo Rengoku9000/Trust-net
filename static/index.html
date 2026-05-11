@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrustNet - AI Fraud Detection</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="logo">
+                <div class="logo-icon"></div>
+                <h1>TrustNet</h1>
+            </div>
+            <p class="subtitle">AI-Powered Financial Document Intelligence</p>
+        </header>
+
+        <main class="main-content">
+            <!-- Upload Section -->
+            <section class="upload-section" id="upload-section">
+                <div class="upload-zone" id="drop-zone">
+                    <input type="file" id="file-input" class="file-input" accept=".txt,.csv,.json,.pdf,.xml">
+                    <div class="upload-content">
+                        <div class="upload-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="17 8 12 3 7 8"></polyline>
+                                <line x1="12" y1="3" x2="12" y2="15"></line>
+                            </svg>
+                        </div>
+                        <h2>Drop your document here</h2>
+                        <p>or <span class="highlight">browse files</span> to run full-spectrum analysis</p>
+                    </div>
+                </div>
+                <!-- Loading State -->
+                <div class="loading-state hidden" id="loading-state">
+                    <div class="spinner"></div>
+                    <p>Neural networks analyzing document layers...</p>
+                </div>
+            </section>
+
+            <!-- Results Dashboard -->
+            <section class="dashboard hidden" id="dashboard">
+                <div class="dashboard-header">
+                    <h2>Analysis Report</h2>
+                    <button class="btn-reset" id="btn-reset">Analyze Another Document</button>
+                </div>
+
+                <div class="dashboard-grid">
+                    <!-- Overall Score Panel -->
+                    <div class="panel score-panel glass">
+                        <h3>Unified Risk Score</h3>
+                        <div class="score-display">
+                            <svg class="score-ring" width="160" height="160">
+                                <circle class="ring-bg" cx="80" cy="80" r="70"></circle>
+                                <circle class="ring-progress" id="score-ring-progress" cx="80" cy="80" r="70"></circle>
+                            </svg>
+                            <div class="score-value">
+                                <span id="unified-score">0</span>
+                                <span class="score-label">/ 100</span>
+                            </div>
+                        </div>
+                        <div class="score-explanation" id="score-explanation">
+                            Scanning complete. Awaiting results.
+                        </div>
+                    </div>
+
+                    <!-- Details Panel -->
+                    <div class="panel details-panel glass">
+                        <div class="file-info">
+                            <h3 id="filename-display">filename.txt</h3>
+                            <p id="filesize-display">0 KB</p>
+                        </div>
+                        
+                        <div class="layers-grid">
+                            <!-- Layer: ELA -->
+                            <div class="layer-card">
+                                <div class="layer-header">
+                                    <h4>Error Level Analysis</h4>
+                                    <span class="layer-score" id="score-ela">0</span>
+                                </div>
+                                <div class="progress-bar"><div class="progress-fill" id="progress-ela"></div></div>
+                            </div>
+                            
+                            <!-- Layer: Benford's Law -->
+                            <div class="layer-card">
+                                <div class="layer-header">
+                                    <h4>Benford's Law</h4>
+                                    <span class="layer-score" id="score-benfords">0</span>
+                                </div>
+                                <div class="progress-bar"><div class="progress-fill" id="progress-benfords"></div></div>
+                                <p class="layer-message" id="msg-benfords"></p>
+                            </div>
+
+                            <!-- Layer: Metadata -->
+                            <div class="layer-card">
+                                <div class="layer-header">
+                                    <h4>Metadata Extraction</h4>
+                                    <span class="layer-score" id="score-metadata">0</span>
+                                </div>
+                                <div class="progress-bar"><div class="progress-fill" id="progress-metadata"></div></div>
+                                <p class="layer-message" id="msg-metadata"></p>
+                            </div>
+
+                            <!-- Layer: NLP -->
+                            <div class="layer-card">
+                                <div class="layer-header">
+                                    <h4>NLP Analysis</h4>
+                                    <span class="layer-score" id="score-nlp">0</span>
+                                </div>
+                                <div class="progress-bar"><div class="progress-fill" id="progress-nlp"></div></div>
+                                <p class="layer-message" id="msg-nlp"></p>
+                            </div>
+
+                            <!-- Layer: GNN -->
+                            <div class="layer-card">
+                                <div class="layer-header">
+                                    <h4>Graph Network Analysis</h4>
+                                    <span class="layer-score" id="score-gnn">0</span>
+                                </div>
+                                <div class="progress-bar"><div class="progress-fill" id="progress-gnn"></div></div>
+                                <p class="layer-message" id="msg-gnn"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Application Script -->
+    <script src="/static/app.js"></script>
+</body>
+</html>
