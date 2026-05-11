@@ -1,0 +1,10 @@
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.vscode/
+test.txt
+*.jpg
+*.jpeg
+*.pdf
+*.png
